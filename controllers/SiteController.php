@@ -2,13 +2,16 @@
 
 namespace app\controllers;
 
+use app\models\PostsSearch;
+use app\models\RegistrationForm;
 use Yii;
+use yii\base\Exception;
+use yii\data\Pagination;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
-use app\models\ContactForm;
 
 class SiteController extends Controller
 {
@@ -61,7 +64,22 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        if (Yii::$app->user->isGuest) {
+            $this->redirect('/sign-in');
+        }
+
+        if (Yii::$app->user->can('admin')) {
+            $this->redirect('/admin');
+        }
+
+        $provider = PostsSearch::search();
+        $provider->pagination = new Pagination([
+            'pageSize' => 10,
+        ]);
+
+        return $this->render('index', [
+            'provider' => $provider,
+        ]);
     }
 
     /**
@@ -69,7 +87,7 @@ class SiteController extends Controller
      *
      * @return Response|string
      */
-    public function actionLogin()
+    public function actionSignIn()
     {
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
@@ -77,11 +95,34 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+            return $this->go();
         }
 
         $model->password = '';
         return $this->render('login', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
+     * Registration action.
+     *
+     * @return Response|string
+     * @throws Exception
+     */
+    public function actionSignUp()
+    {
+        if (!Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+
+        $model = new RegistrationForm();
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->go();
+        }
+
+        $model->password = '';
+        return $this->render('registration', [
             'model' => $model,
         ]);
     }
@@ -98,31 +139,16 @@ class SiteController extends Controller
         return $this->goHome();
     }
 
-    /**
-     * Displays contact page.
-     *
-     * @return Response|string
-     */
-    public function actionContact()
+    public function go($defaultUrl = '/')
     {
-        $model = new ContactForm();
-        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
-            Yii::$app->session->setFlash('contactFormSubmitted');
-
-            return $this->refresh();
+        if (Yii::$app->user->can('admin')) {
+            $url = '/admin';
+        } else if (Yii::$app->user->can('moderator')) {
+            $url = '/moderator';
+        } else {
+            $url = $defaultUrl;
         }
-        return $this->render('contact', [
-            'model' => $model,
-        ]);
-    }
 
-    /**
-     * Displays about page.
-     *
-     * @return string
-     */
-    public function actionAbout()
-    {
-        return $this->render('about');
+        return $this->redirect($url);
     }
 }

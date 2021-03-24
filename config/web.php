@@ -4,14 +4,19 @@ $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
 
 $config = [
+    'name' => 'Последние новости!',
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+    'language' => 'ru',
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
     ],
     'components' => [
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager',
+        ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => '0rf--0TB2OppNf92kNypPi2TDTlR26i9',
@@ -43,14 +48,28 @@ $config = [
             ],
         ],
         'db' => $db,
-        /*
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                'sign-in' => 'site/sign-in',
+                'site/login' => 'site/sign-in',
+                'sign-up' => 'site/sign-up',
+
+                'moderator' => 'moderator/index',
+                'admin' => 'admin/index',
+
+                'news/<id:\d+>' => 'news/index',
+
+                'news/disable/<id:\d+>/<moderate:\d+>' => 'news/disable',
+                'news/delete/<id:\d+>' => 'news/delete',
+                'news/update/<id:\d+>' => 'news/update',
+                'news/create' => 'news/create',
+
+                'user/activate/<id:\d+>/<activate:\d+>' => 'admin/user-activate',
+                'user/delete/<id:\d+>' => 'admin/user-delete',
             ],
         ],
-        */
     ],
     'params' => $params,
 ];

@@ -18,7 +18,6 @@ $config = [
             'class' => 'yii\rbac\DbManager',
         ],
         'request' => [
-            // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => '0rf--0TB2OppNf92kNypPi2TDTlR26i9',
         ],
         'cache' => [
@@ -33,9 +32,6 @@ $config = [
         ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
-            // send all mails to a file by default. You have to set
-            // 'useFileTransport' to false and configure a transport
-            // for the mailer to send real emails.
             'useFileTransport' => true,
         ],
         'log' => [
@@ -56,18 +52,7 @@ $config = [
                 'site/login' => 'site/sign-in',
                 'sign-up' => 'site/sign-up',
 
-                'moderator' => 'moderator/index',
                 'admin' => 'admin/index',
-
-                'news/<id:\d+>' => 'news/index',
-
-                'news/disable/<id:\d+>/<moderate:\d+>' => 'news/disable',
-                'news/delete/<id:\d+>' => 'news/delete',
-                'news/update/<id:\d+>' => 'news/update',
-                'news/create' => 'news/create',
-
-                'user/activate/<id:\d+>/<activate:\d+>' => 'admin/user-activate',
-                'user/delete/<id:\d+>' => 'admin/user-delete',
             ],
         ],
     ],

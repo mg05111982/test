@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\models\PostsSearch;
 use app\models\RegistrationForm;
 use Yii;
+use yii\base\BaseObject;
 use yii\base\Exception;
 use yii\data\Pagination;
 use yii\filters\AccessControl;
@@ -72,7 +73,8 @@ class SiteController extends Controller
             $this->redirect('/admin');
         }
 
-        $provider = PostsSearch::search();
+        $searchModel = new PostsSearch();
+        $provider = $searchModel->search(Yii::$app->request->queryParams);
         $provider->pagination = new Pagination([
             'pageSize' => 10,
         ]);

@@ -44,7 +44,9 @@ class AdminController extends Controller
 
     public function actionIndex()
     {
-        $provider = PostsSearch::search();
+        $searchModel = new PostsSearch();
+        $provider = $searchModel->search();
+
         $provider->pagination = new Pagination([
             'pageSize' => 10,
         ]);

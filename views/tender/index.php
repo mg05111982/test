@@ -21,6 +21,10 @@ foreach ($tenders as $tender):
     ?>
         <div class="text-left"><a href="tender/delete/<?= $tender->id; ?>">Удалить</a></div>
     <?php
+        elseif (Yii::$app->user->can('seller')):
+    ?>
+        <div class="text-left"><a href="tender/participate/<?= $tender->id; ?>/<?= Yii::$app->user->id ?>">Учавствовать</a></div>
+    <?php
         endif;
     ?>
 <?php

@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Participate;
 use app\models\Tenders;
 use Yii;
 
@@ -25,6 +26,20 @@ class TenderController extends \yii\web\Controller
             'model' => $model,
             'tenders' => $tenders,
         ]);
+    }
+
+    public function actionParticipate($tender, $seller)
+    {
+        $participate = new Participate([
+            'tender' => $tender,
+            'seller' => $seller,
+        ]);
+
+        if ($participate->save()) {
+            Yii::$app->session->setFlash('success', 'Участие зарегистрировано');
+        }
+
+        return $this->redirect(Yii::$app->request->referrer);
     }
 
     public function actionDelete($id)

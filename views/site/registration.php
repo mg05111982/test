@@ -32,9 +32,11 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <?= $form->field($model, 'password')->passwordInput() ?>
 
+        <?= $form->field($model, 'nickname')->passwordInput() ?>
+
         <?= $form->field($model, 'role')->dropDownList([
-            'user' => 'user',
-            'moderator' => 'moderator',
+            'seller' => 'seller',
+            'buyer' => 'buyer',
         ]) ?>
 
         <div class="form-group">

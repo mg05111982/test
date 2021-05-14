@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\PostsSearch;
 use app\models\RegistrationForm;
+use app\models\UserList;
 use Yii;
 use yii\base\BaseObject;
 use yii\base\Exception;
@@ -73,14 +74,11 @@ class SiteController extends Controller
             $this->redirect('/admin');
         }
 
-        $searchModel = new PostsSearch();
-        $provider = $searchModel->search(Yii::$app->request->queryParams);
-        $provider->pagination = new Pagination([
-            'pageSize' => 10,
-        ]);
+        $userList = new UserList();
+        $partner = $userList->userList();
 
         return $this->render('index', [
-            'provider' => $provider,
+            'partner' => $partner,
         ]);
     }
 

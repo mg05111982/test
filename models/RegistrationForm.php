@@ -5,6 +5,8 @@ namespace app\models;
 use Yii;
 use yii\base\Exception;
 use yii\base\Model;
+use app\models\Seller;
+use app\models\Buyer;
 
 /**
  * Class RegistrationForm
@@ -15,6 +17,7 @@ class RegistrationForm extends Model
     public $email;
     public $username;
     public $password;
+    public $nickname;
     public $role = false;
 
     /**
@@ -24,7 +27,7 @@ class RegistrationForm extends Model
     {
         return [
             // username and password are both required
-            [['username', 'password'], 'required'],
+            [['username', 'password', 'nickname'], 'required'],
             //email
             ['email', 'validateEmail'],
             // rememberMe must be a boolean value
@@ -45,6 +48,7 @@ class RegistrationForm extends Model
     public function save()
     {
         if ($this->validate()) {
+            $transaction = Yii::$app->getDb()->beginTransaction();
             $user = new User([
                 'active' => 1,
                 'email' => $this->email,
@@ -59,8 +63,17 @@ class RegistrationForm extends Model
 
                 $auth->assign($role, $user->id);
 
+                $class = $this->role == 'seller' ? new Seller() : new Buyer();
+                $class->user_id = $user->id;
+                $class->name = $this->nickname;
+                $class->save();
+
+                $transaction->commit();
+
                 return Yii::$app->user->login($user, 3600*24*30);
             }
+
+            $transaction->rollBack();
 
             return null;
         }

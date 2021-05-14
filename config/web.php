@@ -56,6 +56,7 @@ $config = [
 
                 'dials/<seller:\d+>/<buyer:\d+>' => 'dials/index',
 
+                'tender/participate/<tender:\d+>/<seller:\d+>' => 'tender/participate',
                 'tender/delete/<id:\d+>' => 'tender/delete',
 
                 'dialog/<id:\d+>' => 'dialog/index',

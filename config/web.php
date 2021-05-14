@@ -4,7 +4,7 @@ $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
 
 $config = [
-    'name' => 'Последние новости!',
+    'name' => 'Посредник!',
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
@@ -53,6 +53,11 @@ $config = [
                 'sign-up' => 'site/sign-up',
 
                 'admin' => 'admin/index',
+
+                'dials/<seller:\d+>/<buyer:\d+>' => 'dials/index',
+
+                'dialog/<id:\d+>' => 'dialog/index',
+                'dialog/append' => 'dialog/append',
             ],
         ],
     ],

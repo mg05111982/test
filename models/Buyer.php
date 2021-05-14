@@ -43,8 +43,8 @@ class Buyer extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'user_id' => 'User ID',
-            'name' => 'Name',
-            'description' => 'Description',
+            'name' => 'Имя',
+            'description' => 'Описание',
         ];
     }
 

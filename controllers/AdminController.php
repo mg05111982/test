@@ -44,22 +44,7 @@ class AdminController extends Controller
 
     public function actionIndex()
     {
-        $searchModel = new PostsSearch();
-        $provider = $searchModel->search();
-
-        $provider->pagination = new Pagination([
-            'pageSize' => 10,
-        ]);
-
-        $userProvider = UserSearch::search();
-        $userProvider->pagination = new Pagination([
-            'pageSize' => 10,
-        ]);
-
-        return $this->render('index', [
-            'provider' => $provider,
-            'userProvider' => $userProvider,
-        ]);
+        return $this->render('index', []);
 
     }
 
@@ -77,6 +62,5 @@ class AdminController extends Controller
 
         return $this->redirect(Yii::$app->request->referrer);
     }
-
 
 }

@@ -13,6 +13,12 @@ $this->title = 'Последние новости!';
 ?>
 
 <div class="site-index">
+    <div class="row">
+        <div class="d-flex">
+            <div class="col-md-7"><h3>Список партнеров:</h3></div>
+            <div class="col-md-4"><a href="tender">Конкурсные закупки</a></div>
+        </div>
+    </div>
 <?php
     foreach ($partner as $p):
 ?>

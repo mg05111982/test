@@ -17,12 +17,6 @@ class InitAddonsController extends Controller
         // добавляем роль "buyer"
         $buyer = $auth->createRole('buyer');
         $auth->add($buyer);
-
-        // добавляем роль "admin"
-        $admin = $auth->getRole('admin');
-
-        $auth->addChild($admin, $seller);
-        $auth->addChild($admin, $buyer);
     }
 
 }

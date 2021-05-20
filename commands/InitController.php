@@ -26,10 +26,6 @@ class InitController extends Controller
         $admin = $auth->createRole('admin');
 
         $auth->add($admin);
-
-        $auth->addChild($admin, $user);
-        $auth->addChild($admin, $writer);
-        $auth->addChild($admin, $moderator);
     }
 
 }

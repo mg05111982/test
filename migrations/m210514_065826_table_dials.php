@@ -7,7 +7,7 @@ use yii\db\Migration;
  */
 class m210514_065826_table_dials extends Migration
 {
-    public $tableName = 'dials';
+    public $tableName = 'deals';
 
     /**
      * {@inheritdoc}

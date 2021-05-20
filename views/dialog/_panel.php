@@ -2,6 +2,6 @@
 
 ?>
 
-<div class="btn btn-default"><a href="/dials/<?= $seller; ?>/<?= $buyer; ?>">Заключение договора</a></div>
+<div class="btn btn-default"><a href="/deals/<?= $seller; ?>/<?= $buyer; ?>">Заключение договора</a></div>
 
 <hr />

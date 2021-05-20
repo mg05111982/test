@@ -54,7 +54,7 @@ $config = [
 
                 'admin' => 'admin/index',
 
-                'dials/<seller:\d+>/<buyer:\d+>' => 'dials/index',
+                'deals/<seller:\d+>/<buyer:\d+>' => 'deals/index',
 
                 'tender/participate/<tender:\d+>/<seller:\d+>' => 'tender/participate',
                 'tender/delete/<id:\d+>' => 'tender/delete',

@@ -2,10 +2,10 @@
 
 namespace app\controllers;
 
-use app\models\Dials;
+use app\models\Deals;
 use yii\web\NotFoundHttpException;
 
-class DialsController extends \yii\web\Controller
+class DealsController extends \yii\web\Controller
 {
     public function actionIndex($seller, $buyer)
     {
@@ -13,7 +13,7 @@ class DialsController extends \yii\web\Controller
             throw new NotFoundHttpException('Неверные параметры договора');
         }
 
-        $dials = Dials::dial($seller, $buyer, 1);
+        $dials = Deals::deal($seller, $buyer, 1);
         if ($dials) {
             return $this->render('index');
         }

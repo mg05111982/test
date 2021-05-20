@@ -23,7 +23,7 @@ class DialogsForm extends \yii\base\Model
     public function save()
     {
         $dialogs = new Dialogs();
-        $dialogs->attributes = $this->attributes;
+        $dialogs->setAttributes($this->attributes);
         return $dialogs->save();
     }
 }

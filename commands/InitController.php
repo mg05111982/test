@@ -14,13 +14,13 @@ class InitController extends Controller
         $user = $auth->createRole('user');
         $auth->add($user);
 
-        // добавляем роль "writer"
-        $writer = $auth->createRole('writer');
-        $auth->add($writer);
+        // добавляем роль "seller"
+        $seller = $auth->createRole('seller');
+        $auth->add($seller);
 
-        // добавляем роль "moderator"
-        $moderator = $auth->createRole('moderator');
-        $auth->add($moderator);
+        // добавляем роль "buyer"
+        $buyer = $auth->createRole('buyer');
+        $auth->add($buyer);
 
         // добавляем роль "admin"
         $admin = $auth->createRole('admin');

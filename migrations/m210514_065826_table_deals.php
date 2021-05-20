@@ -5,7 +5,7 @@ use yii\db\Migration;
 /**
  * Class m210514_065826_table_dials
  */
-class m210514_065826_table_dials extends Migration
+class m210514_065826_table_deals extends Migration
 {
     public $tableName = 'deals';
 
